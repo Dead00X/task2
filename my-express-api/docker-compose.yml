@@ -1,0 +1,23 @@
+version: '3'  # เวอร์ชันของ Docker Compose
+
+services:
+  app:  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my_api 
+    ports:
+      - "3000:3000"  # 
+    depends_on:
+      - mongodb  # 
+    environment:
+      MONGO_URL: "mongodb://your_username:password@mongodb:27017"  # URL สำหรับการเชื่อมต่อไปยัง MongoDB
+
+  mongodb:  
+    image: mongo:latest 
+    container_name: my_mongodb  # 
+    ports:
+      - "27017:27017"  # 
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: your_username  # ชื่อผู้ใช้ MongoDB
+      MONGO_INITDB_ROOT_PASSWORD: password  #รหัสผ่าน MongoDB
